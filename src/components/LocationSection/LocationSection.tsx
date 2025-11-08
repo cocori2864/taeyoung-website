@@ -93,7 +93,7 @@ const LocationSection: React.FC = () => {
       <div className="location-section__container">
         {/* Section Header */}
         <div className="location-section__header">
-          <span className="location-section__label">05</span>
+          <span className="location-section__label">04</span>
           <h2 className="location-section__title">
             <span className="location-section__title-en">LOCATION</span>
             <span className="location-section__title-ko">오시는 길</span>
