@@ -24,7 +24,7 @@ const LocationSection: React.FC = () => {
     // 맵 초기화 함수
     window.initNaverMap = () => {
       const mapOptions = {
-        center: new window.naver.maps.LatLng(37.4934, 127.0754), // 원일빌딩 좌표
+        center: new window.naver.maps.LatLng(37.495424, 127.085669), // 개포로 670 원일빌딩
         zoom: 17,
         mapTypeControl: true,
         mapTypeControlOptions: {
@@ -46,7 +46,7 @@ const LocationSection: React.FC = () => {
 
       // 마커 추가
       const marker = new window.naver.maps.Marker({
-        position: new window.naver.maps.LatLng(37.4934, 127.0754),
+        position: new window.naver.maps.LatLng(37.495424, 127.085669),
         map: map,
         title: '태영설비기술사사무소'
       });
