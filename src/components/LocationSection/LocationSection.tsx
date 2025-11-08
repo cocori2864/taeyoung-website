@@ -10,7 +10,10 @@ declare global {
 
 const LocationSection: React.FC = () => {
   const officeInfo = {
-    address: '서울 강남구 개포로 670 (일원동) 원일빌딩 6층'
+    address: '서울 강남구 개포로 670 (일원동) 원일빌딩 6층',
+    tel: '02-431-1235',
+    fax: '02-431-1237',
+    ceo: '김선태'
   };
 
   useEffect(() => {
@@ -116,6 +119,30 @@ const LocationSection: React.FC = () => {
             <div className="location-map__address">
               <h4>태영설비기술사사무소</h4>
               <p>{officeInfo.address}</p>
+            </div>
+          </div>
+        </div>
+
+        {/* Contact Information */}
+        <div className="location-section__contact">
+          <div className="contact-info">
+            <div className="contact-info__item">
+              <span className="contact-info__label">주소</span>
+              <span className="contact-info__value">{officeInfo.address}</span>
+            </div>
+            <div className="contact-info__item">
+              <span className="contact-info__label">대표자</span>
+              <span className="contact-info__value">{officeInfo.ceo}</span>
+            </div>
+            <div className="contact-info__item">
+              <span className="contact-info__label">전화</span>
+              <span className="contact-info__value">
+                <a href={`tel:${officeInfo.tel.replace(/-/g, '')}`}>{officeInfo.tel}</a>
+              </span>
+            </div>
+            <div className="contact-info__item">
+              <span className="contact-info__label">팩스</span>
+              <span className="contact-info__value">{officeInfo.fax}</span>
             </div>
           </div>
         </div>
