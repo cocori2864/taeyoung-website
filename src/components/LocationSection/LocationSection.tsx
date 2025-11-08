@@ -54,7 +54,8 @@ const LocationSection: React.FC = () => {
   useEffect(() => {
     // 네이버맵 스크립트 동적 로드
     const script = document.createElement('script');
-    script.src = 'https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=YOUR_CLIENT_ID&submodules=geocoder';
+    // 네이버 클라우드 플랫폼에서 발급받은 Client ID
+    script.src = 'https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=ccukzeekr8&submodules=geocoder';
     script.async = true;
     script.defer = true;
 
