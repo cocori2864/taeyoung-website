@@ -8,28 +8,7 @@
   background-color: rgba(255, 255, 255, 0.98);
   border-bottom: 1px solid rgba(229, 229, 229, 0.5);
   z-index: 1000;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   backdrop-filter: blur(10px);
-}
-
-/* Scrolled State */
-.header--scrolled {
-  height: 65px;
-  background-color: rgba(255, 255, 255, 0.95);
-  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
-  border-bottom: 1px solid rgba(229, 229, 229, 0.3);
-}
-
-.header--scrolled .logo-text {
-  font-size: 20px;
-}
-
-.header--scrolled .logo-subtext {
-  font-size: 12px;
-}
-
-.header--scrolled .nav-link {
-  font-size: 14px;
 }
 
 .header-container {
@@ -60,7 +39,6 @@
   font-weight: bold;
   color: #003c7b;
   letter-spacing: -0.5px;
-  transition: font-size 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .logo-subtext {
@@ -68,7 +46,6 @@
   color: #333333;
   font-weight: 400;
   margin-left: 4px;
-  transition: font-size 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* Navigation */

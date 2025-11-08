@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import './Header.css';
 
 interface HeaderProps {
@@ -8,7 +8,6 @@ interface HeaderProps {
 
 const Header: React.FC<HeaderProps> = ({ currentLang = 'KOR', onLangChange }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
 
   const navigationItems = [
     { id: 'company', label: '회사소개', href: '#hero' },
@@ -46,23 +45,9 @@ const Header: React.FC<HeaderProps> = ({ currentLang = 'KOR', onLangChange }) =>
     }
   };
 
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrollPosition = window.scrollY;
-      setIsScrolled(scrollPosition > 50);
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    handleScroll(); // Check initial scroll position
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
-
   return (
     <>
-      <header className={`header ${isScrolled ? 'header--scrolled' : ''}`}>
+      <header className="header">
         <div className="header-container">
           {/* Logo */}
           <div className="header-logo">
