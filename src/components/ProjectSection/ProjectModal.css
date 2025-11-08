@@ -243,24 +243,6 @@
   font-size: 18px;
 }
 
-/* Close Hint */
-.project-modal__close-hint {
-  margin-top: 32px;
-  padding: 16px;
-  background: #f8f9fa;
-  border-radius: 10px;
-  text-align: center;
-  border: 1px dashed #ddd;
-}
-
-.project-modal__close-hint span {
-  font-size: 14px;
-  color: #666666;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-}
-
 /* Responsive */
 @media (max-width: 768px) {
   .project-modal {

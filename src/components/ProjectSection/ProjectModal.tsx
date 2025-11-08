@@ -128,11 +128,6 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
                 ))}
               </ul>
             </div>
-
-            {/* Close Instructions */}
-            <div className="project-modal__close-hint">
-              <span>💡 팁: ESC 키 또는 배경 클릭으로 닫을 수 있습니다</span>
-            </div>
           </div>
         </div>
       </div>
