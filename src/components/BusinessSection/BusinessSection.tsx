@@ -54,7 +54,7 @@ const BusinessSection: React.FC = () => {
 
         {/* Business Areas Grid */}
         <div className="business-section__grid">
-          {businessAreas.map((area, index) => (
+          {businessAreas.map((area) => (
             <div key={area.id} className="business-card">
               <div className="business-card__icon-wrapper">
                 <div className="business-card__icon">
