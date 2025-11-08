@@ -4,7 +4,6 @@ import HeroSection from './components/HeroSection/HeroSection';
 import BusinessSection from './components/BusinessSection/BusinessSection';
 import ProjectSection from './components/ProjectSection/ProjectSection';
 import LocationSection from './components/LocationSection/LocationSection';
-import Footer from './components/layout/Footer';
 import './styles/reset.css';
 import './styles/variables.css';
 import './styles/global.css';
@@ -57,9 +56,6 @@ const App: React.FC = () => {
         {/* 03 LOCATION Section */}
         <LocationSection />
       </main>
-
-      {/* Footer */}
-      <Footer />
     </div>
   );
 };
