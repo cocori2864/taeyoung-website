@@ -3,7 +3,6 @@ import Header from './components/Header';
 import HeroSection from './components/HeroSection/HeroSection';
 import BusinessSection from './components/BusinessSection/BusinessSection';
 import ProjectSection from './components/ProjectSection/ProjectSection';
-import NewsSection from './components/NewsSection/NewsSection';
 import LocationSection from './components/LocationSection/LocationSection';
 import Footer from './components/layout/Footer';
 import './styles/reset.css';
@@ -55,10 +54,7 @@ const App: React.FC = () => {
         {/* 02 PROJECT Section */}
         <ProjectSection />
 
-        {/* 03 NEWS Section */}
-        <NewsSection />
-
-        {/* 04 LOCATION Section */}
+        {/* 03 LOCATION Section */}
         <LocationSection />
       </main>
 

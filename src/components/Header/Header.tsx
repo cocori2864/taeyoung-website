@@ -14,7 +14,6 @@ const Header: React.FC<HeaderProps> = ({ currentLang = 'KOR', onLangChange }) =>
     { id: 'company', label: '회사소개', href: '#hero' },
     { id: 'business', label: '사업분야', href: '#business' },
     { id: 'project', label: '프로젝트', href: '#project' },
-    { id: 'news', label: '뉴스', href: '#news' },
     { id: 'location', label: '오시는 길', href: '#location' }
   ];
 
