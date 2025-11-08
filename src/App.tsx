@@ -5,6 +5,7 @@ import BusinessSection from './components/BusinessSection/BusinessSection';
 import ProjectSection from './components/ProjectSection/ProjectSection';
 import NewsSection from './components/NewsSection/NewsSection';
 import CareerSection from './components/CareerSection/CareerSection';
+import LocationSection from './components/LocationSection/LocationSection';
 import Footer from './components/layout/Footer';
 import './styles/reset.css';
 import './styles/variables.css';
@@ -34,6 +35,9 @@ const App: React.FC = () => {
 
         {/* 04 CAREER Section */}
         <CareerSection />
+
+        {/* 05 LOCATION Section */}
+        <LocationSection />
       </main>
 
       {/* Footer */}
