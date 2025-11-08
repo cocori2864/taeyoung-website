@@ -10,7 +10,7 @@ declare global {
 
 const LocationSection: React.FC = () => {
   const officeInfo = {
-    address: '서울 강남구 개포로 670, 6층'
+    address: '서울 강남구 개포로 670 (일원동) 원일빌딩 6층'
   };
 
   useEffect(() => {
@@ -24,8 +24,8 @@ const LocationSection: React.FC = () => {
     // 맵 초기화 함수
     window.initNaverMap = () => {
       const mapOptions = {
-        center: new window.naver.maps.LatLng(37.495906, 127.073893), // 개포로 670 좌표
-        zoom: 16,
+        center: new window.naver.maps.LatLng(37.4934, 127.0754), // 원일빌딩 좌표
+        zoom: 17,
         mapTypeControl: true,
         mapTypeControlOptions: {
           style: window.naver.maps.MapTypeControlStyle.BUTTON,
@@ -46,7 +46,7 @@ const LocationSection: React.FC = () => {
 
       // 마커 추가
       const marker = new window.naver.maps.Marker({
-        position: new window.naver.maps.LatLng(37.495906, 127.073893),
+        position: new window.naver.maps.LatLng(37.4934, 127.0754),
         map: map,
         title: '태영설비기술사사무소'
       });
@@ -56,7 +56,7 @@ const LocationSection: React.FC = () => {
         content: `
           <div style="padding: 10px; min-width: 200px; line-height: 1.5;">
             <h4 style="margin: 0 0 5px 0; color: #003c7b;">태영설비기술사사무소</h4>
-            <p style="margin: 0; font-size: 13px; color: #666;">서울 강남구 개포로 670, 6층</p>
+            <p style="margin: 0; font-size: 13px; color: #666;">서울 강남구 개포로 670 (일원동) 원일빌딩 6층</p>
           </div>
         `
       });
