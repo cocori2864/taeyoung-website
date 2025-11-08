@@ -6,9 +6,8 @@ import path from 'path';
 export default defineConfig({
   plugins: [react()],
   // GitHub Pages를 위한 base URL 설정
-  // 저장소 이름이 'repository-name'이라면 base: '/repository-name/'
-  // 루트 도메인 사용 시 base: '/'
-  base: process.env.NODE_ENV === 'production' ? '/taeyoung-website/' : '/',
+  // 상대 경로 사용으로 변경
+  base: './',
   resolve: {
     alias: {
       '@components': path.resolve(__dirname, './src/components'),
