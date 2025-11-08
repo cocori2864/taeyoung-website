@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import ReactDOM from 'react-dom';
 import './ProjectModal.css';
 
 interface Project {
@@ -23,13 +24,15 @@ interface ProjectModalProps {
 const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
   useEffect(() => {
     if (project) {
+      // 모달이 열릴 때 body 스크롤 방지
       document.body.style.overflow = 'hidden';
     } else {
-      document.body.style.overflow = 'unset';
+      // 모달이 닫힐 때 스크롤 허용
+      document.body.style.overflow = '';
     }
 
     return () => {
-      document.body.style.overflow = 'unset';
+      document.body.style.overflow = '';
     };
   }, [project]);
 
@@ -46,7 +49,8 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
 
   if (!project) return null;
 
-  return (
+  // Portal을 사용하여 body에 직접 렌더링
+  return ReactDOM.createPortal(
     <>
       {/* Backdrop */}
       <div className="project-modal-backdrop" onClick={onClose} />
@@ -124,10 +128,16 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
                 ))}
               </ul>
             </div>
+
+            {/* Close Instructions */}
+            <div className="project-modal__close-hint">
+              <span>💡 팁: ESC 키 또는 배경 클릭으로 닫을 수 있습니다</span>
+            </div>
           </div>
         </div>
       </div>
-    </>
+    </>,
+    document.body
   );
 };
 

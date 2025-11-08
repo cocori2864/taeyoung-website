@@ -3,18 +3,22 @@
   position: fixed;
   top: 0;
   left: 0;
-  right: 0;
-  bottom: 0;
+  width: 100vw;
+  height: 100vh;
   background: rgba(0, 0, 0, 0.75);
-  z-index: 999;
+  z-index: 99998;
   animation: fadeIn 0.3s ease-out;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 /* Modal Container */
 .project-modal {
   position: fixed;
-  top: 50%;
-  left: 50%;
+  top: 50vh;
+  left: 50vw;
   transform: translate(-50%, -50%);
   width: 90%;
   max-width: 900px;
@@ -22,7 +26,7 @@
   background: white;
   border-radius: 20px;
   overflow: hidden;
-  z-index: 1000;
+  z-index: 99999;
   animation: slideUp 0.4s ease-out;
   box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
 }
@@ -35,11 +39,11 @@
 @keyframes slideUp {
   from {
     opacity: 0;
-    transform: translate(-50%, -45%);
+    transform: translate(-50%, -48%) scale(0.95);
   }
   to {
     opacity: 1;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%) scale(1);
   }
 }
 
@@ -48,24 +52,28 @@
   position: absolute;
   top: 20px;
   right: 20px;
-  width: 40px;
-  height: 40px;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
-  background: rgba(0, 0, 0, 0.5);
-  color: white;
-  font-size: 24px;
+  background: rgba(255, 255, 255, 0.95);
+  color: #333;
+  font-size: 28px;
+  font-weight: 300;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   z-index: 10;
   transition: all 0.3s ease;
-  border: none;
+  border: 2px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 
 .project-modal__close:hover {
-  background: rgba(0, 0, 0, 0.8);
+  background: #ff4444;
+  color: white;
   transform: rotate(90deg);
+  border-color: #ff4444;
 }
 
 /* Modal Content */
@@ -233,6 +241,24 @@
   color: #003c7b;
   font-weight: bold;
   font-size: 18px;
+}
+
+/* Close Hint */
+.project-modal__close-hint {
+  margin-top: 32px;
+  padding: 16px;
+  background: #f8f9fa;
+  border-radius: 10px;
+  text-align: center;
+  border: 1px dashed #ddd;
+}
+
+.project-modal__close-hint span {
+  font-size: 14px;
+  color: #666666;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
 }
 
 /* Responsive */
