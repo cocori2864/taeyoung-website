@@ -3,7 +3,7 @@ import './HeroSection.css';
 
 const HeroSection: React.FC = () => {
   return (
-    <section className="hero-section">
+    <section id="hero" className="hero-section">
       <div className="hero-section__container">
         {/* 배경 이미지 - 풍력발전기 이미지 */}
         <div className="hero-section__media">

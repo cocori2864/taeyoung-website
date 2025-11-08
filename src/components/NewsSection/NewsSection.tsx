@@ -49,7 +49,7 @@ const NewsSection: React.FC = () => {
   ];
 
   return (
-    <section className="news-section">
+    <section id="news" className="news-section">
       <div className="news-section__container">
         {/* Section Header */}
         <div className="news-section__header">

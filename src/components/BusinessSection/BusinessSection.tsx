@@ -38,7 +38,7 @@ const BusinessSection: React.FC = () => {
   ];
 
   return (
-    <section className="business-section">
+    <section id="business" className="business-section">
       <div className="business-section__container">
         {/* Section Header */}
         <div className="business-section__header">

@@ -78,7 +78,7 @@ const ProjectSection: React.FC = () => {
   ];
 
   return (
-    <section className="project-section">
+    <section id="project" className="project-section">
       <div className="project-section__container">
         {/* Section Header */}
         <div className="project-section__header">

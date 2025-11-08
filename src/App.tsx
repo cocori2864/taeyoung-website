@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Header from './components/Header';
 import HeroSection from './components/HeroSection/HeroSection';
 import BusinessSection from './components/BusinessSection/BusinessSection';
@@ -12,6 +12,32 @@ import './styles/global.css';
 
 const App: React.FC = () => {
   const [currentLang, setCurrentLang] = useState<'KOR' | 'ENG'>('KOR');
+
+  useEffect(() => {
+    const observerCallback = (entries: IntersectionObserverEntry[]) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    };
+
+    const observer = new IntersectionObserver(observerCallback, {
+      threshold: 0.1,
+      rootMargin: '0px 0px -100px 0px'
+    });
+
+    // Observe all sections
+    const sections = document.querySelectorAll('section');
+    sections.forEach((section) => {
+      section.classList.add('animate-on-scroll');
+      observer.observe(section);
+    });
+
+    return () => {
+      sections.forEach((section) => observer.unobserve(section));
+    };
+  }, []);
 
   return (
     <div className="app">

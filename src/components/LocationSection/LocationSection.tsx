@@ -89,7 +89,7 @@ const LocationSection: React.FC = () => {
   }, []);
 
   return (
-    <section className="location-section">
+    <section id="location" className="location-section">
       <div className="location-section__container">
         {/* Section Header */}
         <div className="location-section__header">

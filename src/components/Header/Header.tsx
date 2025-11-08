@@ -11,11 +11,11 @@ const Header: React.FC<HeaderProps> = ({ currentLang = 'KOR', onLangChange }) =>
   const [isScrolled, setIsScrolled] = useState(false);
 
   const navigationItems = [
-    { id: 'company', label: '회사소개', href: '#company' },
-    { id: 'business', label: '사업소개', href: '#business' },
-    { id: 'invest', label: '투자정보', href: '#invest' },
-    { id: 'pr', label: '홍보센터', href: '#pr' },
-    { id: 'careers', label: '채용정보', href: '#careers' }
+    { id: 'company', label: '회사소개', href: '#hero' },
+    { id: 'business', label: '사업분야', href: '#business' },
+    { id: 'project', label: '프로젝트', href: '#project' },
+    { id: 'news', label: '뉴스', href: '#news' },
+    { id: 'location', label: '오시는 길', href: '#location' }
   ];
 
   const handleLangChange = (lang: 'KOR' | 'ENG') => {
@@ -26,6 +26,25 @@ const Header: React.FC<HeaderProps> = ({ currentLang = 'KOR', onLangChange }) =>
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
+  };
+
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault();
+    const targetId = href.replace('#', '');
+    const targetElement = document.getElementById(targetId);
+
+    if (targetElement) {
+      const headerHeight = 80; // Header height
+      const targetPosition = targetElement.offsetTop - headerHeight;
+
+      window.scrollTo({
+        top: targetPosition,
+        behavior: 'smooth'
+      });
+
+      // Close mobile menu if open
+      setIsMobileMenuOpen(false);
+    }
   };
 
   useEffect(() => {
@@ -59,7 +78,11 @@ const Header: React.FC<HeaderProps> = ({ currentLang = 'KOR', onLangChange }) =>
             <ul className="nav-list">
               {navigationItems.map((item) => (
                 <li key={item.id} className="nav-item">
-                  <a href={item.href} className="nav-link">
+                  <a
+                    href={item.href}
+                    className="nav-link"
+                    onClick={(e) => handleNavClick(e, item.href)}
+                  >
                     {item.label}
                   </a>
                 </li>
@@ -127,7 +150,7 @@ const Header: React.FC<HeaderProps> = ({ currentLang = 'KOR', onLangChange }) =>
                 <a
                   href={item.href}
                   className="mobile-nav-link"
-                  onClick={toggleMobileMenu}
+                  onClick={(e) => handleNavClick(e, item.href)}
                 >
                   {item.label}
                 </a>
