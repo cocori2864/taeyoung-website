@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TAEYOUNG Engineering - 초일류 종합엔지니어링 기업</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Header Styles */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            z-index: 1000;
+        }
+
+        .header-container {
+            max-width: 1920px;
+            margin: 0 auto;
+            padding: 0 50px;
+            height: 96px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: #2b2f35;
+            text-decoration: none;
+        }
+
+        .main-nav {
+            display: flex;
+            gap: 70px;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 0;
+        }
+
+        .language-group {
+            display: flex;
+            gap: 5px;
+            padding-right: 20px;
+            border-right: 1px solid #e5e5e5;
+        }
+
+        /* Button Base */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Roboto', sans-serif;
+            font-weight: 400;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            background: transparent;
+        }
+
+        .btn:focus {
+            outline: 2px solid rgba(43, 47, 53, 0.3);
+            outline-offset: 2px;
+        }
+
+        /* Navigation Button */
+        .btn-nav {
+            color: #333;
+            font-size: 16px;
+            padding: 10px 0;
+            position: relative;
+        }
+
+        .btn-nav::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: #2b2f35;
+            transform: scaleX(0);
+            transition: transform 0.2s;
+        }
+
+        .btn-nav:hover {
+            color: #2b2f35;
+            font-weight: 500;
+        }
+
+        .btn-nav:hover::after {
+            transform: scaleX(1);
+        }
+
+        /* Language Button */
+        .btn-lang {
+            padding: 7px 12px;
+            color: #333;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-lang:hover {
+            color: #2b2f35;
+        }
+
+        .lang-indicator {
+            width: 10px;
+            height: 10px;
+            border: 1px solid #999;
+            border-radius: 50%;
+        }
+
+        .lang-indicator.active {
+            background: #2b2f35;
+            border-color: #2b2f35;
+        }
+
+        /* Menu Button */
+        .btn-menu {
+            padding: 8px 51px;
+            color: #333;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-left: 20px;
+        }
+
+        .btn-menu:hover {
+            background: #f5f5f5;
+        }
+
+        /* Hero Section */
+        .hero {
+            margin-top: 96px;
+            height: 980px;
+            background: linear-gradient(135deg, #1a1d21 0%, #2b2f35 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><rect width="1" height="1" fill="white" opacity="0.05"/></svg>');
+            background-size: 2px 2px;
+        }
+
+        .hero-content {
+            text-align: center;
+            color: white;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 56px;
+            font-weight: 700;
+            margin-bottom: 24px;
+            letter-spacing: -1px;
+        }
+
+        .hero p {
+            font-size: 20px;
+            opacity: 0.9;
+            margin-bottom: 40px;
+        }
+
+        .btn-primary {
+            background: white;
+            color: #2b2f35;
+            padding: 16px 40px;
+            font-size: 18px;
+            font-weight: 500;
+            border-radius: 4px;
+        }
+
+        .btn-primary:hover {
+            background: #f5f5f5;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+        }
+
+        /* Business Section */
+        .business-section {
+            padding: 120px 50px;
+            max-width: 1920px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            margin-bottom: 80px;
+        }
+
+        .section-label {
+            color: #999;
+            font-size: 14px;
+            letter-spacing: 2px;
+            margin-bottom: 16px;
+        }
+
+        .section-title {
+            font-size: 48px;
+            color: #2b2f35;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .section-description {
+            font-size: 18px;
+            color: #666;
+        }
+
+        .business-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+        }
+
+        .business-card {
+            background: white;
+            border: 1px solid #e5e5e5;
+            padding: 40px 30px;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .business-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 32px rgba(0,0,0,0.1);
+            border-color: #2b2f35;
+        }
+
+        .business-icon {
+            width: 80px;
+            height: 80px;
+            background: #f5f5f5;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 24px;
+            font-size: 36px;
+        }
+
+        .business-card h3 {
+            font-size: 24px;
+            color: #2b2f35;
+            margin-bottom: 16px;
+        }
+
+        .business-card p {
+            color: #666;
+            font-size: 16px;
+            margin-bottom: 24px;
+        }
+
+        .business-list {
+            list-style: none;
+            font-size: 14px;
+            color: #666;
+        }
+
+        .business-list li {
+            padding: 8px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .business-list li:last-child {
+            border-bottom: none;
+        }
+
+        .btn-link {
+            color: #2b2f35;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 500;
+            margin-top: 16px;
+        }
+
+        .btn-link:hover {
+            gap: 12px;
+        }
+
+        /* Project Section */
+        .project-section {
+            background: #f9f9f9;
+            padding: 120px 50px;
+        }
+
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            max-width: 1920px;
+            margin: 0 auto;
+        }
+
+        .project-card {
+            background: white;
+            overflow: hidden;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .project-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 32px rgba(0,0,0,0.1);
+        }
+
+        .project-image {
+            width: 100%;
+            height: 300px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 48px;
+        }
+
+        .project-content {
+            padding: 30px;
+        }
+
+        .project-tag {
+            display: inline-block;
+            padding: 4px 12px;
+            background: #f0f0f0;
+            color: #666;
+            font-size: 12px;
+            border-radius: 12px;
+            margin-bottom: 16px;
+        }
+
+        .project-card h3 {
+            font-size: 20px;
+            color: #2b2f35;
+            margin-bottom: 12px;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, #2b2f35 0%, #1a1d21 100%);
+            padding: 100px 50px;
+            text-align: center;
+            color: white;
+        }
+
+        .cta-section h2 {
+            font-size: 42px;
+            font-weight: 700;
+            margin-bottom: 24px;
+        }
+
+        .cta-section p {
+            font-size: 18px;
+            opacity: 0.9;
+            margin-bottom: 40px;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+            padding: 14px 38px;
+            font-size: 18px;
+            font-weight: 500;
+            border-radius: 4px;
+        }
+
+        .btn-secondary:hover {
+            background: white;
+            color: #2b2f35;
+        }
+
+        /* Footer */
+        .footer {
+            background: #2b2f35;
+            color: white;
+            padding: 60px 50px 40px;
+        }
+
+        .footer-content {
+            max-width: 1920px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 60px;
+            margin-bottom: 40px;
+        }
+
+        .footer-logo {
+            font-size: 32px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .footer-description {
+            opacity: 0.8;
+            line-height: 1.8;
+        }
+
+        .footer-section h4 {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            opacity: 0.8;
+            transition: opacity 0.2s;
+        }
+
+        .footer-links a:hover {
+            opacity: 1;
+        }
+
+        .footer-bottom {
+            max-width: 1920px;
+            margin: 0 auto;
+            padding-top: 40px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            opacity: 0.7;
+            font-size: 14px;
+        }
+
+        .btn-dropdown {
+            background: transparent;
+            color: white;
+            border: 1px solid rgba(255,255,255,0.3);
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-radius: 4px;
+        }
+
+        .btn-dropdown:hover {
+            border-color: white;
+            background: rgba(255,255,255,0.1);
+        }
+
+        /* Scroll to Top */
+        .scroll-top {
+            position: fixed;
+            bottom: 40px;
+            right: 40px;
+            width: 56px;
+            height: 56px;
+            background: #2b2f35;
+            color: white;
+            border-radius: 50%;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+            cursor: pointer;
+            z-index: 999;
+            transition: all 0.3s;
+        }
+
+        .scroll-top:hover {
+            background: #1a1d21;
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+        }
+
+        .scroll-top.visible {
+            display: flex;
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .business-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .project-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-container {
+                padding: 0 20px;
+                height: 70px;
+            }
+            
+            .main-nav {
+                display: none;
+            }
+            
+            .hero {
+                margin-top: 70px;
+                height: 600px;
+            }
+            
+            .hero h1 {
+                font-size: 36px;
+            }
+            
+            .business-grid,
+            .project-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+            
+            .footer-bottom {
+                flex-direction: column;
+                gap: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-container">
+            <a href="#" class="logo">TAEYOUNG</a>
+            
+            <nav class="main-nav">
+                <button class="btn btn-nav" onclick="navigate('company')">회사소개</button>
+                <button class="btn btn-nav" onclick="navigate('business')">사업소개</button>
+                <button class="btn btn-nav" onclick="navigate('investor')">투자정보</button>
+                <button class="btn btn-nav" onclick="navigate('pr')">홍보센터</button>
+                <button class="btn btn-nav" onclick="navigate('careers')">채용정보</button>
+            </nav>
+            
+            <div class="header-actions">
+                <div class="language-group">
+                    <button class="btn btn-lang" onclick="changeLang('KOR')">
+                        <span>KOR</span>
+                        <div class="lang-indicator active" id="kor-indicator"></div>
+                    </button>
+                    <button class="btn btn-lang" onclick="changeLang('ENG')">
+                        <span>ENG</span>
+                        <div class="lang-indicator" id="eng-indicator"></div>
+                    </button>
+                </div>
+                <button class="btn btn-menu" onclick="toggleMenu()">
+                    <svg width="32" height="24" viewBox="0 0 32 24" fill="none">
+                        <rect width="32" height="3" fill="currentColor" rx="1.5"/>
+                        <rect y="10" width="32" height="3" fill="currentColor" rx="1.5"/>
+                        <rect y="20" width="32" height="3" fill="currentColor" rx="1.5"/>
+                    </svg>
+                    MENU
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>초일류 종합엔지니어링 기업</h1>
+            <p>세계를 향한 태영의 도전은 계속됩니다</p>
+            <button class="btn btn-primary" onclick="scrollToSection('business')">
+                사업 분야 보기 →
+            </button>
+        </div>
+    </section>
+
+    <!-- Business Section -->
+    <section class="business-section" id="business">
+        <div class="section-header">
+            <div class="section-label">01 BUSINESS</div>
+            <h2 class="section-title">사업 소개</h2>
+            <p class="section-description">
+                초일류 종합엔지니어링 기업 태영의 세계를 향한 도전은 계속됩니다.
+            </p>
+        </div>
+
+        <div class="business-grid">
+            <!-- Water Sector -->
+            <div class="business-card" onclick="showBusinessDetail('water')">
+                <div class="business-icon">💧</div>
+                <h3>물 부문</h3>
+                <p>Water Sector</p>
+                <ul class="business-list">
+                    <li>상수도</li>
+                    <li>하수도</li>
+                    <li>하천/수자원개발/댐</li>
+                </ul>
+                <a href="#" class="btn-link">
+                    자세히 보기 →
+                </a>
+            </div>
+
+            <!-- Urban Sector -->
+            <div class="business-card" onclick="showBusinessDetail('urban')">
+                <div class="business-icon">🏙️</div>
+                <h3>도시 부문</h3>
+                <p>Urban Sector</p>
+                <ul class="business-list">
+                    <li>도시계획·개발</li>
+                    <li>조경·레저</li>
+                    <li>스마트 시티</li>
+                </ul>
+                <a href="#" class="btn-link">
+                    자세히 보기 →
+                </a>
+            </div>
+
+            <!-- Transportation -->
+            <div class="business-card" onclick="showBusinessDetail('transport')">
+                <div class="business-icon">🚇</div>
+                <h3>교통 부문</h3>
+                <p>Transportation Sector</p>
+                <ul class="business-list">
+                    <li>도로공항</li>
+                    <li>교통계획</li>
+                    <li>철도/지하철</li>
+                </ul>
+                <a href="#" class="btn-link">
+                    자세히 보기 →
+                </a>
+            </div>
+
+            <!-- Energy -->
+            <div class="business-card" onclick="showBusinessDetail('energy')">
+                <div class="business-icon">⚡</div>
+                <h3>에너지 부문</h3>
+                <p>Energy Sector</p>
+                <ul class="business-list">
+                    <li>태양광</li>
+                    <li>풍력</li>
+                    <li>환경플랜트</li>
+                </ul>
+                <a href="#" class="btn-link">
+                    자세히 보기 →
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Project Section -->
+    <section class="project-section" id="projects">
+        <div class="section-header">
+            <div class="section-label">02 PROJECT</div>
+            <h2 class="section-title">주요 프로젝트</h2>
+            <p class="section-description">
+                태영의 세계를 향한 도전은 계속됩니다.
+            </p>
+        </div>
+
+        <div class="project-grid">
+            <div class="project-card">
+                <div class="project-image">🌞</div>
+                <div class="project-content">
+                    <span class="project-tag">태양광</span>
+                    <h3>베트남 꽝빈성 Le Thuy 태양광발전사업 EPC공사</h3>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-image">💨</div>
+                <div class="project-content">
+                    <span class="project-tag">풍력</span>
+                    <h3>신지풍력발전단지조성사업 EPC공사</h3>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-image">🛣️</div>
+                <div class="project-content">
+                    <span class="project-tag">교통</span>
+                    <h3>노들로 구조개선 기본 및 실시설계</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <h2>태영과 함께 하세요</h2>
+        <p>세계를 선도하는 종합 엔지니어링 기업으로 성장하고 있습니다</p>
+        <div class="btn-group">
+            <button class="btn btn-primary" onclick="scrollToSection('projects')">
+                프로젝트 보기
+            </button>
+            <button class="btn btn-secondary" onclick="showContact()">
+                문의하기
+            </button>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div>
+                <div class="footer-logo">TAEYOUNG</div>
+                <p class="footer-description">
+                    서울특별시 강남구 삼성로 438 (#06178)<br>
+                    대표전화 02-6323-3000<br>
+                    © 2024 TAEYOUNG Engineering Co., LTD. All Rights Reserved.
+                </p>
+            </div>
+
+            <div class="footer-section">
+                <h4>회사소개</h4>
+                <ul class="footer-links">
+                    <li><a href="#">회사개요</a></li>
+                    <li><a href="#">경영이념</a></li>
+                    <li><a href="#">CI소개</a></li>
+                    <li><a href="#">연혁</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h4>사업소개</h4>
+                <ul class="footer-links">
+                    <li><a href="#">물 부문</a></li>
+                    <li><a href="#">도시 부문</a></li>
+                    <li><a href="#">교통 부문</a></li>
+                    <li><a href="#">에너지 부문</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h4>고객지원</h4>
+                <ul class="footer-links">
+                    <li><a href="#">공지사항</a></li>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">문의하기</a></li>
+                    <li><a href="#">오시는 길</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div>
+                <a href="#" style="color: white; text-decoration: none; margin-right: 20px;">개인정보 처리방침</a>
+                <a href="#" style="color: white; text-decoration: none;">윤리경영 제보라인</a>
+            </div>
+            <button class="btn btn-dropdown" onclick="toggleFamilySite()">
+                <span>Family Site</span>
+                <svg width="11" height="7" viewBox="0 0 11 7" fill="none">
+                    <path d="M1 1L5.5 5.5L10 1" stroke="currentColor" stroke-width="1.5"/>
+                </svg>
+            </button>
+        </div>
+    </footer>
+
+    <!-- Scroll to Top Button -->
+    <button class="scroll-top" id="scrollTop" onclick="scrollToTop()">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M12 19V5M12 5L5 12M12 5L19 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+    </button>
+
+    <script>
+        // Language switcher
+        function changeLang(lang) {
+            document.getElementById('kor-indicator').classList.toggle('active', lang === 'KOR');
+            document.getElementById('eng-indicator').classList.toggle('active', lang === 'ENG');
+            console.log('Language changed to:', lang);
+        }
+
+        // Menu toggle
+        function toggleMenu() {
+            alert('메뉴가 열립니다');
+        }
+
+        // Navigation
+        function navigate(section) {
+            console.log('Navigate to:', section);
+            alert(`${section} 페이지로 이동합니다`);
+        }
+
+        // Scroll to section
+        function scrollToSection(id) {
+            document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Business detail
+        function showBusinessDetail(type) {
+            console.log('Show business detail:', type);
+        }
+
+        // Contact
+        function showContact() {
+            alert('문의 페이지로 이동합니다');
+        }
+
+        // Family site
+        function toggleFamilySite() {
+            alert('Family Site 드롭다운이 열립니다');
+        }
+
+        // Scroll to top
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Show/hide scroll to top button
+        window.addEventListener('scroll', () => {
+            const scrollTop = document.getElementById('scrollTop');
+            if (window.pageYOffset > 300) {
+                scrollTop.classList.add('visible');
+            } else {
+                scrollTop.classList.remove('visible');
+            }
+        });
+
+        // Smooth scroll for all internal links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

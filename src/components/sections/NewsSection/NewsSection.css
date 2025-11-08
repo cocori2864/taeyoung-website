@@ -1,0 +1,117 @@
+.news {
+  background: var(--color-bg-secondary);
+}
+
+.news__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 4rem;
+}
+
+.news__title {
+  font-size: 3.6rem;
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+}
+
+.news__more-link {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  font-size: 1.6rem;
+  color: var(--color-text-secondary);
+  transition: color var(--transition-base);
+}
+
+.news__more-link:hover {
+  color: var(--color-primary);
+}
+
+.news__list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.news-item {
+  background: #fff;
+  border-bottom: 1px solid var(--color-border);
+  transition: background var(--transition-base);
+}
+
+.news-item:first-child {
+  border-top: 1px solid var(--color-border);
+}
+
+.news-item:hover {
+  background: var(--color-bg-secondary);
+}
+
+.news-item__link {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 3rem 2rem;
+}
+
+.news-item__content {
+  flex: 1;
+}
+
+.news-item__category {
+  display: inline-block;
+  padding: 0.4rem 1rem;
+  background: var(--color-primary);
+  color: #fff;
+  font-size: 1.2rem;
+  font-weight: var(--font-weight-medium);
+  border-radius: 4px;
+  margin-bottom: 1rem;
+}
+
+.news-item__title {
+  font-size: 2rem;
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+  margin-bottom: 1rem;
+  transition: color var(--transition-base);
+}
+
+.news-item:hover .news-item__title {
+  color: var(--color-primary);
+}
+
+.news-item__excerpt {
+  font-size: 1.5rem;
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+}
+
+.news-item__date {
+  font-size: 1.4rem;
+  color: var(--color-text-light);
+  white-space: nowrap;
+}
+
+@media (max-width: 768px) {
+  .news__header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2rem;
+  }
+
+  .news__title {
+    font-size: 2.8rem;
+  }
+
+  .news-item__link {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2rem;
+  }
+
+  .news-item__title {
+    font-size: 1.8rem;
+  }
+}

@@ -1,0 +1,84 @@
+/* CSS Variables - Exact from Real Figma Data */
+:root {
+  /* Colors from actual Figma file */
+  --color-primary: #004442; /* Primary green from sections */
+  --color-dark-text: #2B2F35; /* Text color from Figma */
+  --color-light-gray: #9EA3AB; /* Secondary text color */
+  --color-light-blue-bg: #E8EFF8; /* Background from Figma */
+  --color-white: #FFFFFF;
+  --color-black: #000000;
+
+  /* Typography from actual Figma */
+  --font-family-primary: 'Noto Sans KR', sans-serif;
+  --font-family-secondary: 'Roboto', sans-serif;
+
+  /* Hero Section Navigation Buttons */
+  --font-size-nav-button: 18px;
+  --font-weight-nav-button: 400;
+  --letter-spacing-nav-button: 2px;
+  --line-height-nav-button: 21.09px;
+
+  /* Main Heading (BUSINESS, etc.) */
+  --font-size-heading-main: 56px;
+  --font-weight-heading-main: 350;
+  --letter-spacing-heading-main: 9px;
+  --line-height-heading-main: 56px;
+
+  /* Description Text */
+  --font-size-description: 20px;
+  --font-weight-description: 300;
+  --letter-spacing-description: -1px;
+  --line-height-description: 33.2px;
+
+  /* Section Labels (01 BUSINESS) */
+  --font-size-label: 14px;
+  --font-weight-label: 700;
+  --letter-spacing-label: 0.7px;
+  --line-height-label: 23.24px;
+
+  /* Section Titles (물 부문, 도시 부문) */
+  --font-size-section-title: 28px;
+  --font-weight-section-title: 350;
+  --letter-spacing-section-title: -1px;
+  --line-height-section-title: 29.96px;
+
+  /* Section Items */
+  --font-size-section-item: 17px;
+  --font-weight-section-item: 350;
+  --letter-spacing-section-item: -1px;
+  --line-height-section-item: 29.75px;
+
+  /* Section Category (Water Sector, Urban Sector) */
+  --font-size-category: 16px;
+  --font-weight-category: 300;
+  --letter-spacing-category: 0;
+  --line-height-category: 26.56px;
+
+  /* Layout from Figma */
+  --breakpoint-desktop: 1920px;
+  --hero-height: 980px;
+  --content-section-height: 612px;
+
+  /* Spacing */
+  --spacing-xs: 0.8rem;
+  --spacing-sm: 1.2rem;
+  --spacing-md: 1.6rem;
+  --spacing-lg: 2.4rem;
+  --spacing-xl: 3.2rem;
+  --spacing-2xl: 4.8rem;
+  --spacing-3xl: 6.4rem;
+  --spacing-4xl: 9.6rem;
+
+  /* Transitions */
+  --transition-fast: 0.2s ease;
+  --transition-base: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 0.5s ease;
+
+  /* Z-index */
+  --z-dropdown: 100;
+  --z-sticky: 200;
+  --z-fixed: 300;
+  --z-modal-backdrop: 400;
+  --z-modal: 500;
+  --z-tooltip: 600;
+}

@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TAEYOUNG 버튼 시스템 - 실제 구현</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: #f9f9f9;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* Header */
+        .demo-header {
+            background: white;
+            padding: 20px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 40px;
+        }
+
+        .demo-header h1 {
+            text-align: center;
+            color: #2b2f35;
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .demo-header p {
+            text-align: center;
+            color: #666;
+        }
+
+        /* Section */
+        .section {
+            background: white;
+            border-radius: 8px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .section-title {
+            font-size: 24px;
+            color: #2b2f35;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e5e5e5;
+        }
+
+        .section-subtitle {
+            font-size: 18px;
+            color: #666;
+            margin: 20px 0 15px;
+            font-weight: 500;
+        }
+
+        .demo-group {
+            margin-bottom: 25px;
+        }
+
+        .code-block {
+            background: #f5f5f5;
+            border-left: 4px solid #2b2f35;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            overflow-x: auto;
+        }
+
+        /* Button Base Styles */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Roboto', sans-serif;
+            font-weight: 400;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+            text-decoration: none;
+            outline: none;
+            white-space: nowrap;
+        }
+
+        .btn:focus {
+            outline: 2px solid transparent;
+            outline-offset: 2px;
+            box-shadow: 0 0 0 3px rgba(43, 47, 53, 0.3);
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+
+        /* Button Variants */
+        .btn-primary {
+            background-color: #2b2f35;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #1a1d21;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+
+        .btn-primary:active {
+            background-color: #0d0f11;
+            transform: translateY(0);
+        }
+
+        .btn-secondary {
+            background-color: #f5f5f5;
+            color: #333333;
+        }
+
+        .btn-secondary:hover {
+            background-color: #e5e5e5;
+        }
+
+        .btn-secondary:active {
+            background-color: #d5d5d5;
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            color: #333333;
+            border: 1px solid #999999;
+        }
+
+        .btn-outline:hover {
+            border-color: #666666;
+            background-color: #f5f5f5;
+        }
+
+        .btn-outline:active {
+            border-color: #333333;
+            background-color: #e5e5e5;
+        }
+
+        .btn-text {
+            background-color: transparent;
+            color: #333333;
+        }
+
+        .btn-text:hover {
+            color: #2b2f35;
+            text-decoration: underline;
+        }
+
+        .btn-navigation {
+            background-color: transparent;
+            color: #333333;
+            position: relative;
+            padding: 10px 16px;
+        }
+
+        .btn-navigation::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background-color: #2b2f35;
+            transform: scaleX(0);
+            transition: transform 0.2s ease-in-out;
+        }
+
+        .btn-navigation:hover {
+            color: #2b2f35;
+            font-weight: 500;
+        }
+
+        .btn-navigation:hover::after {
+            transform: scaleX(1);
+        }
+
+        .btn-menu {
+            background-color: transparent;
+            color: #333333;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 8px 30px;
+        }
+
+        .btn-menu:hover {
+            background-color: #f5f5f5;
+        }
+
+        .btn-dropdown {
+            background-color: transparent;
+            color: #2b2f35;
+            border: 1px solid #999999;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            padding: 12px 16px;
+            width: 192px;
+        }
+
+        .btn-dropdown:hover {
+            border-color: #666666;
+            background-color: #f9f9f9;
+        }
+
+        /* Button Sizes */
+        .btn-sm {
+            padding: 6px 12px;
+            font-size: 14px;
+            height: 32px;
+        }
+
+        .btn-md {
+            padding: 8px 16px;
+            font-size: 16px;
+            height: 40px;
+        }
+
+        .btn-lg {
+            padding: 12px 24px;
+            font-size: 18px;
+            height: 48px;
+        }
+
+        .btn-xl {
+            padding: 16px 32px;
+            font-size: 20px;
+            height: 56px;
+        }
+
+        /* Button States */
+        .btn-loading {
+            position: relative;
+            color: transparent;
+            pointer-events: none;
+        }
+
+        .btn-loading::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            top: 50%;
+            left: 50%;
+            margin-left: -10px;
+            margin-top: -10px;
+            border: 2px solid currentColor;
+            border-radius: 50%;
+            border-top-color: transparent;
+            animation: spin 0.6s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .btn-full {
+            width: 100%;
+        }
+
+        /* Button Group */
+        .btn-group {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        /* Slider Demo */
+        .slider-demo {
+            background: linear-gradient(135deg, #2b2f35 0%, #1a1d21 100%);
+            padding: 60px 40px;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            min-height: 300px;
+        }
+
+        .btn-slide {
+            background-color: transparent;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 11px;
+            min-width: 138px;
+            font-size: 18px;
+            letter-spacing: 2px;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+
+        .btn-slide:hover {
+            opacity: 0.8;
+        }
+
+        .slide-content {
+            text-align: center;
+            color: white;
+        }
+
+        .slide-number {
+            font-size: 48px;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+
+        /* Header Demo */
+        .header-demo {
+            background: white;
+            border: 1px solid #e5e5e5;
+            padding: 20px 30px;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #2b2f35;
+        }
+
+        .nav-demo {
+            display: flex;
+            gap: 30px;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .language-selector {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn-language {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 7px 12px;
+            background: transparent;
+            border: none;
+            color: #333;
+            cursor: pointer;
+            font-family: 'Roboto', sans-serif;
+            font-size: 14px;
+            transition: color 0.2s;
+        }
+
+        .btn-language:hover {
+            color: #2b2f35;
+        }
+
+        .language-indicator {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            border: 1px solid #999;
+        }
+
+        .language-indicator.active {
+            background: #2b2f35;
+            border-color: #2b2f35;
+        }
+
+        /* Footer Demo */
+        .footer-demo {
+            background: #2b2f35;
+            color: white;
+            padding: 30px;
+            border-radius: 8px;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-info {
+            font-size: 14px;
+            opacity: 0.8;
+        }
+
+        /* Scroll to Top */
+        .btn-scroll-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 48px;
+            height: 48px;
+            background-color: #2b2f35;
+            color: white;
+            border-radius: 50%;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .btn-scroll-top:hover {
+            background-color: #1a1d21;
+            transform: translateY(-4px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Icons */
+        .icon {
+            width: 24px;
+            height: 24px;
+            display: inline-block;
+        }
+
+        .menu-icon {
+            width: 32px;
+            height: 24px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px 15px;
+            }
+
+            .header-demo {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .nav-demo {
+                flex-direction: column;
+                gap: 15px;
+                width: 100%;
+            }
+
+            .btn-navigation {
+                width: 100%;
+                text-align: center;
+            }
+
+            .slider-demo {
+                flex-direction: column;
+                gap: 30px;
+                padding: 40px 20px;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                gap: 20px;
+            }
+        }
+
+        /* Toast Notification */
+        .toast {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #2b2f35;
+            color: white;
+            padding: 16px 24px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            transform: translateX(400px);
+            transition: transform 0.3s ease;
+            z-index: 2000;
+        }
+
+        .toast.show {
+            transform: translateX(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Toast Notification -->
+    <div id="toast" class="toast"></div>
+
+    <!-- Demo Header -->
+    <div class="demo-header">
+        <h1>🎨 TAEYOUNG 버튼 시스템</h1>
+        <p>실제 작동하는 완전한 버튼 컴포넌트 라이브러리</p>
+    </div>
+
+    <div class="container">
+        
+        <!-- 1. Basic Buttons -->
+        <div class="section">
+            <h2 class="section-title">1. 기본 버튼 변형</h2>
+            
+            <div class="demo-group">
+                <h3 class="section-subtitle">Primary Buttons</h3>
+                <div class="btn-group">
+                    <button class="btn btn-primary btn-sm" onclick="showToast('Small 버튼 클릭!')">Small</button>
+                    <button class="btn btn-primary btn-md" onclick="showToast('Medium 버튼 클릭!')">Medium</button>
+                    <button class="btn btn-primary btn-lg" onclick="showToast('Large 버튼 클릭!')">Large</button>
+                    <button class="btn btn-primary btn-xl" onclick="showToast('Extra Large 버튼 클릭!')">Extra Large</button>
+                </div>
+                <div class="code-block">&lt;button class="btn btn-primary btn-md"&gt;Medium&lt;/button&gt;</div>
+            </div>
+
+            <div class="demo-group">
+                <h3 class="section-subtitle">Secondary Buttons</h3>
+                <div class="btn-group">
+                    <button class="btn btn-secondary btn-sm">Small</button>
+                    <button class="btn btn-secondary btn-md">Medium</button>
+                    <button class="btn btn-secondary btn-lg">Large</button>
+                    <button class="btn btn-secondary btn-xl">Extra Large</button>
+                </div>
+            </div>
+
+            <div class="demo-group">
+                <h3 class="section-subtitle">Outline Buttons</h3>
+                <div class="btn-group">
+                    <button class="btn btn-outline btn-sm">Small</button>
+                    <button class="btn btn-outline btn-md">Medium</button>
+                    <button class="btn btn-outline btn-lg">Large</button>
+                    <button class="btn btn-outline btn-xl">Extra Large</button>
+                </div>
+            </div>
+
+            <div class="demo-group">
+                <h3 class="section-subtitle">Text Buttons</h3>
+                <div class="btn-group">
+                    <button class="btn btn-text btn-sm">Small Link</button>
+                    <button class="btn btn-text btn-md">Medium Link</button>
+                    <button class="btn btn-text btn-lg">Large Link</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2. Website Header -->
+        <div class="section">
+            <h2 class="section-title">2. 웹사이트 헤더 (네비게이션 버튼)</h2>
+            <div class="header-demo">
+                <div class="logo">TAEYOUNG</div>
+                
+                <nav class="nav-demo">
+                    <button class="btn btn-navigation" onclick="showToast('회사소개 페이지로 이동')">회사소개</button>
+                    <button class="btn btn-navigation" onclick="showToast('사업소개 페이지로 이동')">사업소개</button>
+                    <button class="btn btn-navigation" onclick="showToast('투자정보 페이지로 이동')">투자정보</button>
+                    <button class="btn btn-navigation" onclick="showToast('홍보센터 페이지로 이동')">홍보센터</button>
+                    <button class="btn btn-navigation" onclick="showToast('채용정보 페이지로 이동')">채용정보</button>
+                </nav>
+                
+                <div class="header-actions">
+                    <div class="language-selector">
+                        <button class="btn-language" onclick="changeLanguage('KOR')">
+                            <span>KOR</span>
+                            <div class="language-indicator active" id="kor-indicator"></div>
+                        </button>
+                        <button class="btn-language" onclick="changeLanguage('ENG')">
+                            <span>ENG</span>
+                            <div class="language-indicator" id="eng-indicator"></div>
+                        </button>
+                    </div>
+                    <button class="btn btn-menu" onclick="toggleMenu()">
+                        <svg class="menu-icon" viewBox="0 0 32 24" fill="none">
+                            <path d="M2 2H30M2 12H30M2 22H30" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                        MENU
+                    </button>
+                </div>
+            </div>
+            <div class="code-block">&lt;button class="btn btn-navigation"&gt;회사소개&lt;/button&gt;</div>
+        </div>
+
+        <!-- 3. Slider Controls -->
+        <div class="section">
+            <h2 class="section-title">3. 슬라이더 컨트롤</h2>
+            <div class="slider-demo">
+                <button class="btn-slide" onclick="prevSlide()">
+                    <span>BUSINESS</span>
+                    <svg width="18" height="35" viewBox="0 0 18 35" fill="none">
+                        <path d="M17 1L2 17.5L17 34" stroke="currentColor" stroke-width="2"/>
+                    </svg>
+                </button>
+                
+                <div class="slide-content">
+                    <p>현재 슬라이드</p>
+                    <div class="slide-number" id="slideNumber">1</div>
+                    <p>클릭해서 슬라이드 변경</p>
+                </div>
+                
+                <button class="btn-slide" onclick="nextSlide()">
+                    <span>HISTORY</span>
+                    <svg width="18" height="35" viewBox="0 0 18 35" fill="none">
+                        <path d="M1 1L16 17.5L1 34" stroke="currentColor" stroke-width="2"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="code-block">&lt;button class="btn-slide"&gt;...&lt;/button&gt;</div>
+        </div>
+
+        <!-- 4. Button States -->
+        <div class="section">
+            <h2 class="section-title">4. 버튼 상태</h2>
+            
+            <div class="demo-group">
+                <h3 class="section-subtitle">로딩 상태</h3>
+                <div class="btn-group">
+                    <button class="btn btn-primary btn-md" onclick="simulateLoading(this)">
+                        로딩 시뮬레이션
+                    </button>
+                    <button class="btn btn-secondary btn-md btn-loading">
+                        로딩 중...
+                    </button>
+                </div>
+            </div>
+
+            <div class="demo-group">
+                <h3 class="section-subtitle">비활성화 상태</h3>
+                <div class="btn-group">
+                    <button class="btn btn-primary btn-md" disabled>비활성화</button>
+                    <button class="btn btn-secondary btn-md" disabled>비활성화</button>
+                    <button class="btn btn-outline btn-md" disabled>비활성화</button>
+                </div>
+            </div>
+
+            <div class="demo-group">
+                <h3 class="section-subtitle">전체 너비</h3>
+                <button class="btn btn-primary btn-md btn-full" onclick="showToast('전체 너비 버튼!')">
+                    전체 너비 버튼
+                </button>
+            </div>
+        </div>
+
+        <!-- 5. Button Groups -->
+        <div class="section">
+            <h2 class="section-title">5. 버튼 그룹</h2>
+            
+            <div class="demo-group">
+                <h3 class="section-subtitle">액션 버튼 그룹</h3>
+                <div class="btn-group">
+                    <button class="btn btn-primary btn-md" onclick="showToast('저장되었습니다!')">
+                        💾 저장
+                    </button>
+                    <button class="btn btn-secondary btn-md" onclick="showToast('취소되었습니다!')">
+                        ❌ 취소
+                    </button>
+                    <button class="btn btn-outline btn-md" onclick="confirmDelete()">
+                        🗑️ 삭제
+                    </button>
+                </div>
+            </div>
+
+            <div class="demo-group">
+                <h3 class="section-subtitle">소셜 공유</h3>
+                <div class="btn-group">
+                    <button class="btn btn-outline btn-md" onclick="showToast('Facebook 공유')">
+                        📘 Facebook
+                    </button>
+                    <button class="btn btn-outline btn-md" onclick="showToast('Twitter 공유')">
+                        🐦 Twitter
+                    </button>
+                    <button class="btn btn-outline btn-md" onclick="showToast('LinkedIn 공유')">
+                        💼 LinkedIn
+                    </button>
+                    <button class="btn btn-outline btn-md" onclick="copyLink()">
+                        🔗 링크 복사
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 6. Footer -->
+        <div class="section">
+            <h2 class="section-title">6. 웹사이트 푸터</h2>
+            <div class="footer-demo">
+                <div class="footer-content">
+                    <div class="footer-info">
+                        © 2024 TAEYOUNG Engineering Co., LTD. All Rights Reserved.
+                    </div>
+                    <button class="btn btn-dropdown" onclick="toggleDropdown()">
+                        <span>Family Site</span>
+                        <svg width="11" height="7" viewBox="0 0 11 7" fill="none">
+                            <path d="M1 1L5.5 5.5L10 1" stroke="currentColor" stroke-width="1.5"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 7. Interactive Demo -->
+        <div class="section">
+            <h2 class="section-title">7. 인터랙티브 폼 예시</h2>
+            <form onsubmit="handleSubmit(event)" style="max-width: 500px;">
+                <div style="margin-bottom: 20px;">
+                    <label style="display: block; margin-bottom: 8px; font-weight: 500;">이름</label>
+                    <input type="text" id="nameInput" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px;" required>
+                </div>
+                
+                <div style="margin-bottom: 20px;">
+                    <label style="display: block; margin-bottom: 8px; font-weight: 500;">이메일</label>
+                    <input type="email" id="emailInput" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px;" required>
+                </div>
+                
+                <div class="btn-group">
+                    <button type="submit" class="btn btn-primary btn-lg">
+                        ✉️ 제출하기
+                    </button>
+                    <button type="button" class="btn btn-secondary btn-lg" onclick="resetForm()">
+                        🔄 초기화
+                    </button>
+                </div>
+            </form>
+        </div>
+
+    </div>
+
+    <!-- Scroll to Top Button -->
+    <button class="btn-scroll-top" onclick="scrollToTop()" title="맨 위로">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M12 19V5M12 5L5 12M12 5L19 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+    </button>
+
+    <script>
+        // Slide functionality
+        let currentSlide = 1;
+        
+        function nextSlide() {
+            currentSlide++;
+            document.getElementById('slideNumber').textContent = currentSlide;
+            showToast('다음 슬라이드: ' + currentSlide);
+        }
+        
+        function prevSlide() {
+            if (currentSlide > 1) {
+                currentSlide--;
+                document.getElementById('slideNumber').textContent = currentSlide;
+                showToast('이전 슬라이드: ' + currentSlide);
+            } else {
+                showToast('첫 번째 슬라이드입니다');
+            }
+        }
+
+        // Language selector
+        function changeLanguage(lang) {
+            document.getElementById('kor-indicator').classList.toggle('active', lang === 'KOR');
+            document.getElementById('eng-indicator').classList.toggle('active', lang === 'ENG');
+            showToast('언어 변경: ' + lang);
+        }
+
+        // Menu toggle
+        function toggleMenu() {
+            showToast('메뉴가 열렸습니다');
+        }
+
+        // Dropdown toggle
+        function toggleDropdown() {
+            showToast('Family Site 드롭다운 열림');
+        }
+
+        // Loading simulation
+        function simulateLoading(btn) {
+            const originalText = btn.textContent;
+            btn.classList.add('btn-loading');
+            btn.disabled = true;
+            
+            setTimeout(() => {
+                btn.classList.remove('btn-loading');
+                btn.disabled = false;
+                showToast('작업 완료!');
+            }, 2000);
+        }
+
+        // Form handling
+        function handleSubmit(event) {
+            event.preventDefault();
+            const name = document.getElementById('nameInput').value;
+            const email = document.getElementById('emailInput').value;
+            
+            const submitBtn = event.target.querySelector('button[type="submit"]');
+            submitBtn.classList.add('btn-loading');
+            submitBtn.disabled = true;
+            
+            setTimeout(() => {
+                submitBtn.classList.remove('btn-loading');
+                submitBtn.disabled = false;
+                showToast(`제출 완료! 이름: ${name}, 이메일: ${email}`);
+                event.target.reset();
+            }, 1500);
+        }
+
+        function resetForm() {
+            document.querySelector('form').reset();
+            showToast('폼이 초기화되었습니다');
+        }
+
+        // Delete confirmation
+        function confirmDelete() {
+            if (confirm('정말로 삭제하시겠습니까?')) {
+                showToast('삭제되었습니다');
+            } else {
+                showToast('삭제가 취소되었습니다');
+            }
+        }
+
+        // Copy link
+        function copyLink() {
+            const url = window.location.href;
+            navigator.clipboard.writeText(url).then(() => {
+                showToast('링크가 복사되었습니다!');
+            });
+        }
+
+        // Scroll to top
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+            showToast('페이지 상단으로 이동');
+        }
+
+        // Toast notification
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.classList.add('show');
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        // Show scroll-to-top button when scrolling
+        window.addEventListener('scroll', () => {
+            const scrollBtn = document.querySelector('.btn-scroll-top');
+            if (window.pageYOffset > 300) {
+                scrollBtn.style.display = 'flex';
+            } else {
+                scrollBtn.style.display = 'none';
+            }
+        });
+
+        // Initial setup
+        document.querySelector('.btn-scroll-top').style.display = 'none';
+        
+        // Welcome message
+        setTimeout(() => {
+            showToast('👋 TAEYOUNG 버튼 시스템에 오신 것을 환영합니다!');
+        }, 500);
+    </script>
+</body>
+</html>
